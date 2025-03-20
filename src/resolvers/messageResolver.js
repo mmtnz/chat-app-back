@@ -5,7 +5,7 @@ const MESSAGE_ADDED = 'MESSAGE_ADDED';
 
 const messageResolver = {
     Query: {
-        conversationMessages: async (_, { conversation_id }) => await getMessagesByConversation(conversation_id),
+        conversationMessages: async (_, { conversation_id }) => {return await getMessagesByConversation(conversation_id)},
     },
     Mutation: {
         sendMessage: async (_, { conversation_id, sender, content }) => {
@@ -16,7 +16,7 @@ const messageResolver = {
     },
     Subscription: {
         messageAdded: {
-        subscribe: (_, { conversation_id }) => pubsub.asyncIterator([MESSAGE_ADDED]),
+            subscribe: (_, { conversation_id }) => pubsub.asyncIterator([MESSAGE_ADDED]),
         },
     },
 };

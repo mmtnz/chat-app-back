@@ -2,7 +2,7 @@ import pkg from 'pg';
 import dotenv from 'dotenv';
 
 const { Pool } = pkg; // Destructure Pool from default import
-dotenv.config();
+dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 
 const pool = new Pool({
     user: process.env.DB_USER,

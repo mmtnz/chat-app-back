@@ -1,7 +1,7 @@
 import pool from '../config/database.js';
 
 export const getMessagesByConversation = async (conversation_id) => {
-    const res = await pool.query('SELECT * FROM messages WHERE conversation_id = $1', [conversation_id]);
+    const res = await pool.query('SELECT * FROM messages WHERE conversation_id = $1 ORDER BY created_at ASC', [conversation_id]);
     return res.rows;
 };
 
