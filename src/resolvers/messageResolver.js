@@ -5,18 +5,27 @@ const MESSAGE_ADDED = 'MESSAGE_ADDED';
 
 const messageResolver = {
     Query: {
-        conversationMessages: async (_, { conversation_id }) => {return await getMessagesByConversation(conversation_id)},
+        conversationMessages: async (_, { conversationId }) => {
+            return await getMessagesByConversation(conversationId)
+        },
     },
     Mutation: {
-        sendMessage: async (_, { conversation_id, sender, content }) => {
-            const message = await sendMessage(conversation_id, sender, content);
-            pubsub.publish(MESSAGE_ADDED, { messageAdded: message });
+        sendMessage: async (_, { conversationId, sender, content }) => {
+            const message = await sendMessage(conversationId, sender, content);
+            // Publish to a specific conversation topic
+            pubsub.publish(`${MESSAGE_ADDED}_${conversationId}`, { messageAdded: message });
             return message;
         },
     },
     Subscription: {
         messageAdded: {
-            subscribe: (_, { conversation_id }) => pubsub.asyncIterator([MESSAGE_ADDED]),
+            subscribe: (_, { conversationId }) => {
+                console.log(`Subscribed to messages in conversation ${conversationId}`);
+                console.log("PubSub instance:", pubsub);
+                console.log("Does PubSub have asyncIterator?", typeof pubsub.asyncIterator);
+                console.log("Does PubSub have asyncIterableIterator?", typeof pubsub.asyncIterableIterator);
+                return pubsub.asyncIterableIterator([`${MESSAGE_ADDED}_${conversationId}`]);
+            }
         },
     },
 };

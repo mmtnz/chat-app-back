@@ -18,16 +18,16 @@ const typeDefs = gql`
   type Query {
     conversations: [Conversation!]!
     conversation(id: ID!): Conversation
-    conversationMessages(conversation_id: ID!): [Message!]
+    conversationMessages(conversationId: ID!): [Message!]
   }
 
   type Mutation {
     createConversation(name: String!): Conversation!
-    sendMessage(conversation_id: ID!, sender: String!, content: String!): Message!
+    sendMessage(conversationId: ID!, sender: String!, content: String!): Message!
   }
 
   type Subscription {
-    messageAdded(conversation_id: ID!): Message!
+    messageAdded(conversationId: ID!): Message!
   }
 `;
 
