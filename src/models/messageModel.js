@@ -5,10 +5,10 @@ export const getMessagesByConversation = async (conversationId) => {
     return res.rows;
 };
 
-export const sendMessage = async (conversationId, sender, content) => {
+export const sendMessage = async (conversationId, sender, content, system) => {
     const res = await pool.query(
-        'INSERT INTO messages (conversation_id, sender, content) VALUES ($1, $2, $3) RETURNING *',
-        [conversationId, sender, content]
+        'INSERT INTO messages (conversation_id, sender, content, system) VALUES ($1, $2, $3, $4) RETURNING *',
+        [conversationId, sender, content, system]
     );
     return res.rows[0];
 };

@@ -10,8 +10,9 @@ const messageResolver = {
         },
     },
     Mutation: {
-        sendMessage: async (_, { conversationId, sender, content }) => {
-            const message = await sendMessage(conversationId, sender, content);
+        sendMessage: async (_, { conversationId, sender, content, system }) => {
+            const message = await sendMessage(conversationId, sender, content, system);
+            // console.log(message)
             // Publish to a specific conversation topic
             pubsub.publish(`${MESSAGE_ADDED}_${conversationId}`, { messageAdded: message });
             return message;
@@ -21,9 +22,6 @@ const messageResolver = {
         messageAdded: {
             subscribe: (_, { conversationId }) => {
                 console.log(`Subscribed to messages in conversation ${conversationId}`);
-                console.log("PubSub instance:", pubsub);
-                console.log("Does PubSub have asyncIterator?", typeof pubsub.asyncIterator);
-                console.log("Does PubSub have asyncIterableIterator?", typeof pubsub.asyncIterableIterator);
                 return pubsub.asyncIterableIterator([`${MESSAGE_ADDED}_${conversationId}`]);
             }
         },

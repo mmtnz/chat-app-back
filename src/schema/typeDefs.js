@@ -11,6 +11,7 @@ const typeDefs = gql`
     id: ID!
     conversation_id: ID!
     sender: String!
+    system: Boolean
     content: String!
     created_at: String!
   }
@@ -23,7 +24,7 @@ const typeDefs = gql`
 
   type Mutation {
     createConversation(name: String!): Conversation!
-    sendMessage(conversationId: ID!, sender: String!, content: String!): Message!
+    sendMessage(conversationId: ID!, sender: String!, content: String!, system: Boolean): Message!
   }
 
   type Subscription {
