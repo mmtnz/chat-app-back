@@ -1,0 +1,59 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5433:5432
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+        options: >-
+          --health-cmd "pg_isready -U testuser -d testdb"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        volumes:
+          - ./init-db:/docker-entrypoint-initdb.d
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Wait for Postgres to be ready
+        run: |
+          until pg_isready -h localhost -p 5433 -U testuser -d testdb; do
+            echo "Waiting for DB..."
+            sleep 1
+          done
+
+      - name: 🧪 Run Jest tests
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5433
+          DB_NAME: testdb
+          DB_USER: testuser
+          DB_PASSWORD: testpass
+          NODE_OPTIONS: --experimental-vm-modules
+        run: npm test

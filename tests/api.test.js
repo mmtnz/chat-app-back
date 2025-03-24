@@ -3,6 +3,7 @@ import { ApolloServer } from "apollo-server-express";
 import typeDefs from "../src/schema/typeDefs.js";
 import resolvers from "../src/resolvers/index.js";
 import express from "express";
+import { jest } from '@jest/globals';
 
 let server, app;
 

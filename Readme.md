@@ -16,6 +16,7 @@ Subscribe to conversations and receive real-time updates when new messages are s
 - PostgreSQL (via Docker)
 - Node.js
 - Docker & Docker Compose
+- Jest for testing
 
 ## Getting Started
 
