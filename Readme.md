@@ -17,6 +17,7 @@ Subscribe to conversations and receive real-time updates when new messages are s
 - Node.js
 - Docker & Docker Compose
 - Jest for testing
+- Github Actions for CI testing
 
 ## Getting Started
 
