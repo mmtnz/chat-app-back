@@ -57,6 +57,10 @@ jobs:
         run: |
           PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init.sql
 
+      - name: Verify schema
+        run: |
+          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -c "\dt"
+
 
       - name: Wait for schema to be ready
         run: |
