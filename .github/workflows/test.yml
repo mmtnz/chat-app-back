@@ -47,7 +47,7 @@ jobs:
             sleep 1
           done
 
-      - name: 🧪 Run Jest tests
+      - name: Run Jest tests
         env:
           NODE_ENV: test
           DB_HOST: localhost
