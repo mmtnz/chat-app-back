@@ -3,7 +3,12 @@
 This is the backend for a real-time message chat application, built using GraphQL with apollo-server-express and a PostgreSQL database running inside Docker. It provides APIs for sending, retrieving, and managing chat messages.
 
 ## 🚀 Features
-- Send receive and create 
+- **Create Conversations**:
+Start a new chat thread between users. 
+- **Send Messages**:
+Send messages within a conversation. Each message is stored in the PostgreSQL database.
+- **Real-time Subscriptions**:
+Subscribe to conversations and receive real-time updates when new messages are sent (powered by GraphQL Subscriptions).
 
 ## 🛠️ Tech Stack
 
@@ -55,6 +60,9 @@ Server will be running at:
 🔗 http://localhost:4000/graphql
 
 You can test queries and mutations in Apollo Studio or any GraphQL client.
+
+### 6. Launch the front end (Optional)
+To have a user friendly GUI install the front end [Chat App Frontend](https://github.com/mmtnz/chat-app-front).
 
 ## 🎯 Project Purpose
 This App was built for practicing:
