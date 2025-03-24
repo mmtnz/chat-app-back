@@ -4,12 +4,25 @@ import dotenv from 'dotenv';
 const { Pool } = pkg; // Destructure Pool from default import
 dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 
+console.log({
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    db: process.env.POSTGRES_DB,
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+  });
+
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DB,
+    password: process.env.POSTGRES_PASSWORD,
+    port: Number(process.env.POSTGRES_PORT),
 });
+
+pool.query('SELECT NOW()', (err, res) => {
+    if (err) console.error('DB connection failed:', err);
+    else console.log('Connected to DB at:', res.rows[0].now);
+  });
 
 export default pool;
