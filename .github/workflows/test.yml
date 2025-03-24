@@ -25,8 +25,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        volumes:
-          - ./init-db:/docker-entrypoint-initdb.d
+        # volumes:
+        #   - ./init-db:/docker-entrypoint-initdb.d
+    
 
     steps:
       - name: Checkout repository
@@ -39,6 +40,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Initialize test schema
+        run: |
+          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init-test-db.sql
+
 
       - name: Wait for Postgres to be ready
         run: |
