@@ -50,10 +50,10 @@ jobs:
       - name: Run Jest tests
         env:
           NODE_ENV: test
-          DB_HOST: localhost
-          DB_PORT: 5433
-          DB_NAME: testdb
-          DB_USER: testuser
-          DB_PASSWORD: testpass
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5433
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
           NODE_OPTIONS: --experimental-vm-modules
         run: npm test
