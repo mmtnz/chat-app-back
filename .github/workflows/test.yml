@@ -44,11 +44,6 @@ jobs:
       - name: Debug list project files
         run: ls -R
 
-      - name: Initialize test schema
-        run: |
-          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init.sql
-
-
       - name: Wait for Postgres to be ready
         run: |
           until pg_isready -h localhost -p 5433 -U testuser -d testdb; do
@@ -57,6 +52,14 @@ jobs:
           done
           echo "PostgreSQL is accepting connections."
 
+
+      - name: Initialize test schema
+        run: |
+          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init.sql
+
+
+      - name: Wait for schema to be ready
+        run: |
           until psql -h localhost -p 5433 -U testuser -d testdb -c "SELECT * FROM conversations LIMIT 1;" > /dev/null 2>&1; do
           echo "Waiting for tables to be created..."
           sleep 1
