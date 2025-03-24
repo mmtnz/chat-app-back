@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Debug: list project files
+      - name: Debug list project files
         run: ls -R
 
       - name: Initialize test schema
