@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Debug: list project files
+        run: ls -R
+
       - name: Initialize test schema
         run: |
           PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init.sql
