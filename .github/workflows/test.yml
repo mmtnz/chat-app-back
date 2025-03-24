@@ -43,7 +43,7 @@ jobs:
 
       - name: Initialize test schema
         run: |
-          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init-test-db.sql
+          PGPASSWORD=testpass psql -h localhost -p 5433 -U testuser -d testdb -f ./init-db/init-db.sql
 
 
       - name: Wait for Postgres to be ready
