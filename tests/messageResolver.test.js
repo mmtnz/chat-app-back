@@ -47,7 +47,7 @@ describe('Message Resolver', () => {
       sender: 'Bob',
       content: 'Test message',
       system: false,
-      created_at: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
 
     sendMessage.mockResolvedValue(mockMessage);
