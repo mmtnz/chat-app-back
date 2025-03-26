@@ -30,7 +30,7 @@ Subscribe to conversations and receive real-time updates when new messages are s
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/mmtnz/chat-app-back.git
-cd chat-app-backend
+cd chat-app-back
 ```
 
 ### 2. Install dependencies
