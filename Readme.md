@@ -10,6 +10,9 @@ Send messages within a conversation. Each message is stored in the PostgreSQL da
 - **Real-time Subscriptions**:
 Subscribe to conversations and receive real-time updates when new messages are sent (powered by GraphQL Subscriptions).
 
+## 📸 Screenshots
+![image](https://github.com/user-attachments/assets/12d82936-2242-4e0e-8c38-d1da905f3d15)
+
 ## 🛠️ Tech Stack
 
 - GraphQL (Apollo Server with Express)
