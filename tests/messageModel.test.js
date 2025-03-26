@@ -19,7 +19,7 @@ describe('Message Model (Integration)', () => {
     const message = await sendMessage(conversationId, 'Alice', 'Hello message', false);
 
     expect(message).toHaveProperty('id');
-    expect(message.conversation_id).toBe(conversationId);
+    expect(message.conversationId).toBe(conversationId);
     expect(message.sender).toBe('Alice');
     expect(message.content).toBe('Hello message');
   });
@@ -29,6 +29,6 @@ describe('Message Model (Integration)', () => {
 
     expect(Array.isArray(messages)).toBe(true);
     expect(messages.length).toBeGreaterThan(0); // ✅ You sent at least one message above
-    expect(messages[0].conversation_id).toBe(conversationId);
+    expect(messages[0].conversationId).toBe(conversationId);
   });
 });
