@@ -13,7 +13,7 @@ const typeDefs = gql`
     sender: String!
     system: Boolean
     content: String!
-    created_at: String!
+    createdAt: String!
   }
 
   type Query {

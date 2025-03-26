@@ -6,7 +6,7 @@ const toGraphQLMessage = (row) => ({
     sender: row.sender,
     content: row.content,
     system: row.system,
-    created_at: row.created_at
+    createdAt: row.created_at
 });
   
 
